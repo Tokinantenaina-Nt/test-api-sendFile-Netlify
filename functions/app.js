@@ -14,7 +14,7 @@ app.get('*', (req, res) => {
     //     console.error(err);
     //     res.status(500).send('Erreur lors de la lecture du fichier JSON');
     // }
-    res.sendFile(filePath);
+    res.sendfile(filePath);
 });
 app.listen(6200, () => {
     console.log('listen 6200');
