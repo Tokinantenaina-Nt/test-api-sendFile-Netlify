@@ -6,15 +6,17 @@ const fs = require('fs');
 
 app.get('*', (req, res) => {
     const filePath = "functions/test.json";
-    // //OU, lecture synchrone du fichier (à utiliser avec prudence, car cela peut bloquer le serveur)
-    // try {
-    //     const data = fs.readFileSync(filePath, 'utf8');
-    //     res.json(JSON.parse(data));
-    // } catch (err) {
-    //     console.error(err);
-    //     res.status(500).send('Erreur lors de la lecture du fichier JSON');
-    // }
-    res.sendFile(filePath, { root: process.cwd() });
+
+    // Utilisation de fs.readFile pour lire le contenu et l'envoyer directement
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Erreur lors de la lecture du fichier JSON');
+        } else {
+            // Envoyer le contenu JSON en tant que réponse
+            res.type('application/json').send(data);
+        }
+    });
 });
 app.listen(6200, () => {
     console.log('listen 6200');
