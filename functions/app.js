@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 
 app.get('*', (req, res) => {
-    const filePath = path.join(process.cwd(), "functions/Capture.PNG");
+    const filePath = path.join(process.cwd(), "functions/test.json");
     res.sendFile(filePath);
 });
 app.listen(6200, () => {
