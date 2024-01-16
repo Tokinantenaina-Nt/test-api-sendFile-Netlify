@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 app.get('*', (req, res) => {
-    const filePath = path.join(process.cwd(), "functions/test.json");
+    const filePath = "functions/test.json";
     // //OU, lecture synchrone du fichier (à utiliser avec prudence, car cela peut bloquer le serveur)
     // try {
     //     const data = fs.readFileSync(filePath, 'utf8');
@@ -14,7 +14,7 @@ app.get('*', (req, res) => {
     //     console.error(err);
     //     res.status(500).send('Erreur lors de la lecture du fichier JSON');
     // }
-    res.sendfile(filePath);
+    res.sendFile(filePath, { root: process.cwd() });
 });
 app.listen(6200, () => {
     console.log('listen 6200');
