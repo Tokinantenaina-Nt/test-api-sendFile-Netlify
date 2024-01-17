@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/images/*"
-  to = "/.netlify/functions/imageHandler"
+  to = "/.netlify/functions/app"
   status = 200
