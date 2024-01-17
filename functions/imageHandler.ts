@@ -3,9 +3,8 @@ import { EdgeFunction, Request, Context } from "@netlify/edge-functions";
 const imageHandler: EdgeFunction = async (event) => {
     const { request } = event;
 
-    // Vous pouvez définir des conditions pour vérifier quelle image renvoyer en fonction de la requête
-    // Ici, nous renvoyons simplement une image interne
-    const internalImage = new URL("/Capture.png", request.url);
+    // Référence à une image stockée dans le répertoire public/images
+    const internalImage = new URL("/images/apple-touch-icon.png", request.url);
 
     // Créez la réponse en fonction de l'image
     const response = new Response(null, {
