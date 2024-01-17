@@ -1,15 +1,12 @@
 // imageProcessingFunction.js
 const sharp = require('sharp');
-const path = require('path');
-const fs = require('fs');
+const axios = require('axios');
 
 exports.handler = async function (event, context) {
-    // Obtenir le chemin complet de l'image en fonction du répertoire de déploiement de Netlify
-    const imagePath = path.join(__dirname, 'Capture.png');
-
     try {
-        // Lire l'image depuis le fichier
-        const imageBuffer = fs.readFileSync(imagePath);
+        // Récupérer l'image depuis GitHub
+        const githubResponse = await axios.get('https://raw.githubusercontent.com/Tokinantenaina-Nt/test-api-sendFile-Netlify/blob/main/capture.png', { responseType: 'arraybuffer' });
+        const imageBuffer = Buffer.from(githubResponse.data, 'binary');
 
         // Traitement de l'image (redimensionnement dans cet exemple)
         const processedImageBuffer = await sharp(imageBuffer)
@@ -29,7 +26,7 @@ exports.handler = async function (event, context) {
 
         return {
             statusCode: 500,
-            body: JSON.stringify(error),
+            body: JSON.stringify({ error: 'Internal Server Error' }),
         };
     }
 };
