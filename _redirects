@@ -1,1 +1,4 @@
-/* /.netlify/functions/app
+[[redirects]]
+  from = "/images/*"
+  to = "/.netlify/functions/imageHandler"
+  status = 200
