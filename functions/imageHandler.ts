@@ -4,7 +4,19 @@ import type { Context, Config } from "@netlify/edge-functions";
 // by rewriting the URL.
 
 export default async (request: Request, context: Context) => {
-    return new URL("/Capture.png", request.url);
+    // Récupérer l'URL de l'image interne
+    const imageUrl = new URL("/Capture.png", request.url);
+
+    // Créer une réponse avec la redirection vers l'image interne
+    const response = new Response(null, {
+        status: 200,
+        headers: {
+            "Location": imageUrl.toString(),
+            "Content-Type": "image/png", // Spécifiez le type de contenu si nécessaire
+        },
+    });
+
+    return response;
 };
 
 export const config: Config = {
