@@ -5,7 +5,7 @@ const axios = require('axios');
 exports.handler = async function (event, context) {
     try {
         // Récupérer l'image depuis GitHub
-        const githubResponse = await axios.get('https://raw.githubusercontent.com/Tokinantenaina-Nt/test-api-sendFile-Netlify/main/capture.png', { responseType: 'arraybuffer' });
+        const githubResponse = await axios.get('https://raw.githubusercontent.com/Tokinantenaina-Nt/test-api-sendFile-Netlify/main/Capture.png', { responseType: 'arraybuffer' });
         const imageBuffer = Buffer.from(githubResponse.data, 'binary');
 
         // Traitement de l'image (redimensionnement dans cet exemple)
