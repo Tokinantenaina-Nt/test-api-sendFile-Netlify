@@ -1,22 +1,12 @@
-import { EdgeFunction, Request, Context } from "@netlify/edge-functions";
+import type { Context, Config } from "@netlify/edge-functions";
 
-const imageHandler: EdgeFunction = async (event) => {
-    const { request } = event;
+// Let's serve an image that's stored in the repo
+// by rewriting the URL.
 
-    // Référence à une image stockée dans le répertoire public/images
-    const internalImage = new URL("/images/apple-touch-icon.png", request.url);
-
-    // Créez la réponse en fonction de l'image
-    const response = new Response(null, {
-        status: 200,
-        headers: {
-            "Content-Type": "image/png",
-        },
-    });
-
-    // Redirigez la réponse vers l'image interne
-    response.headers.set("location", internalImage.toString());
-    return response;
+export default async (request: Request, context: Context) => {
+    return new URL("/Capture.png", request.url);
 };
 
-export { imageHandler };
+export const config: Config = {
+    path: "/",
+};
